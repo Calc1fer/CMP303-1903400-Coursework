@@ -23,6 +23,7 @@ public class ServerHandle
         Server.clients[from_client].SendLevelTriggerIntoGame();
     }
 
+    //Handle information about the player positions and rotations (inputs) related to the client world space for the player and predicted movement
     public static void PlayerMovement(int from_client, Packet packet)
     {
         bool[] inputs = new bool[packet.ReadInt()];
@@ -43,6 +44,9 @@ public class ServerHandle
         Server.clients[from_client].player.Shoot(shoot_dir);
     }
 
+    //Packet filled with the times and positions of the player transforms over a period of time which will be used in the player class to 
+    //predict the future position of the player. There isn't much security relating to the safe travel of the packets so if there is a lot
+    // of traffic then this may not work at all since the client side doesn't have total control of the player object.
     public static void InterpolatePos(int from_client, Packet packet)
     {
         List<Vector4>pos_vals = new List<Vector4>();

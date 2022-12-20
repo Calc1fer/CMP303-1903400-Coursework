@@ -32,6 +32,8 @@ public class NetManager : MonoBehaviour
     {
         Server.Stop();
     }
+
+    //Instantiate the player
     public Player InstantiatePlayer()
     {
         return Instantiate(player_prefab, new Vector3(0f, 1.08f, 0f), Quaternion.identity).GetComponent<Player>();

@@ -22,17 +22,8 @@ public class ObstacleStatic : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //compare the tag and if it is player, call the player damage function and give the damage values
         if(other.CompareTag("Player"))
-        {
-            Player player = other.GetComponent<Player>();
-            player.PlayerDamage(damage);
-            Debug.Log("Hit static");
-        }
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Player"))
         {
             Player player = other.GetComponent<Player>();
             player.PlayerDamage(damage);

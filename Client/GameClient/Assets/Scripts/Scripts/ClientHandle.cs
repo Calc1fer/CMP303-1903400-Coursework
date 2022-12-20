@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class ClientHandle : MonoBehaviour
 {
+    //Welcome packet to show the user the client has managed to connect to the server
     public static void Welcome(Packet packet)
     {
         string msg = packet.ReadString();
@@ -19,6 +20,12 @@ public class ClientHandle : MonoBehaviour
     }
 
 
+    //All functions send the necessary information in packets to the server.
+    //Numerous packet functions can be condensed into single functions that handle all information.
+    // i.e. Projectiles can send postion, rotation and id in a single packet from the server, therefore reducing time for function calls and allowing
+    //the client to handle all information quicker.
+
+    //Here we send the id of the player, username, position and rotation. The id is required so we know which player to spawn and update
     public static void SpawnPlayer(Packet packet)
     {
         int id = packet.ReadInt();
@@ -80,12 +87,11 @@ public class ClientHandle : MonoBehaviour
         int id = packet.ReadInt();
         Vector3 position = packet.ReadVec3();
 
-        //if (GameManager.projectiles[id] != null)
-        //{
-            GameManager.projectiles[id].DestroyProjectiles(position);
-//        }
+        GameManager.projectiles[id].DestroyProjectiles(position);
     }
 
+    //Function that deals with the disconnection of the players if they so force close or are disconnected from the 
+    //server unexpectedly
     public static void PlayerDisconnected(Packet packet)
     {
         int id = packet.ReadInt();
@@ -110,6 +116,10 @@ public class ClientHandle : MonoBehaviour
         GameManager.players[id].Respawn();
     }
 
+    //For all obstacles, the server will send the client information pertaining to their position and rotation, 
+    //meaning that all objects are hosted on the server and are merely spawned in on the client side when connected.
+
+    //This is potentially a dangerous thing to do when we take latency and network traffic into account.
     public static void SpinObstacleSpawner(Packet packet)
     {
         int id = packet.ReadInt();

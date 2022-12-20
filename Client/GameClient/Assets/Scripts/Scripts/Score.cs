@@ -10,6 +10,7 @@ public class Score : MonoBehaviour
 
     int collectibles = 0;
 
+    //Function to grab the tag of the player. If the player collectible count increases then update this in text on screen
     public void Update()
     {
         if(player == null)

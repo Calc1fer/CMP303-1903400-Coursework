@@ -29,9 +29,11 @@ public class PlayerController : MonoBehaviour
             pos_vals[0] = pos_vals[1];
             pos_vals[1] = pos_vals[2];
             
+            //this will always be the newest time and positions of the player objects
             pos_vals[2] = new Vector4(transform.position.x, transform.position.y, transform.position.z, timer);
         }
 
+        //Shoot functionality for the players
         if(Input.GetKeyDown(KeyCode.Space))
         {
             ClientSend.PlayerShoot(transform.forward);
@@ -45,23 +47,27 @@ public class PlayerController : MonoBehaviour
 
     private void SendInputToServer()
     {
+        //Preferably not use this, the traditional getAxis input in unity does the trick, but I had difficulty 
+        //with transformations so had to keep using this
         bool[] inputs = new bool[]
         {
             Input.GetKey(KeyCode.W),
             Input.GetKey(KeyCode.S),
             Input.GetKey(KeyCode.A),
             Input.GetKey(KeyCode.D),
-            Input.GetKey(KeyCode.Q),
-            Input.GetKey(KeyCode.E),
+            Input.GetKey(KeyCode.Q), //For rotations (not working as desired)
+            Input.GetKey(KeyCode.E), //"" "" ""
         };
 
         ClientSend.PlayerMovement(inputs);
 
+        //Return out of function if the list of vectors does not contain 3 elements
         if(pos_vals.Count < 3)
         {
             return;
         }
 
+        //Otherwise let's send the list to the server after writing to the packet
         ClientSend.InterpolateMovement(pos_vals);
     }
 }

@@ -196,6 +196,9 @@ public class Client
     }
 
 
+
+    //send into game functions that deals with spawning the level of the game and instantiates the player objects
+    //This is sent to the client for handling level building on the client side
     public void SendIntoGame(string player_name)
     {
         player = NetManager.instance.InstantiatePlayer();

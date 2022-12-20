@@ -14,6 +14,5 @@ public class ProjectileManager : MonoBehaviour
     {
         GameManager.projectiles.Remove(id);
         Destroy(gameObject);
-        //GameManager.projectiles[id] = new ProjectileManager();
     }
 }

@@ -62,6 +62,9 @@ public class ServerSend : MonoBehaviour
 
     #region Packets
 
+
+    //All functions are sending info to the client for being attributed to the relevant game objects in the game world.
+    //Packets are filled with positions, rotations and other relevant data required for the functionality of the game
     public static void Welcome(int to_client, string msg)
     {
         using (Packet packet = new Packet((int)ServerPackets.welcome))

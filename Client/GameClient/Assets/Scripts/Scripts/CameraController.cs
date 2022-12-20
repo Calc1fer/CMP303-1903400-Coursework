@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//For use if the user wants the camera to follow the player. This is disabled in the unity editor on the player prefab
 public class CameraController : MonoBehaviour
 {
     public PlayerManager player;

@@ -119,6 +119,7 @@ public class Server
 
         packet_handler = new Dictionary<int, PacketHandler>()
             {
+            //dictionary for the packets to be sent to the client, vice versa
                 { (int)ClientPackets.welcomeReceived, ServerHandle.WelcomeReceived},
                 { (int)ClientPackets.player_movement, ServerHandle.PlayerMovement},
                 { (int)ClientPackets.player_shoot, ServerHandle.PlayerShoot},

@@ -278,6 +278,8 @@ public class Client : MonoBehaviour
 
     private void InitClientData()
     {
+        //the packets ready to be initialised after recieving from the server
+        //The relevant functions in client handle will be called and from there the data will be applied to objects in the game
         packet_handlers = new Dictionary<int, PacketHandler>()
         {
             { (int)ServerPackets.welcome, ClientHandle.Welcome},
@@ -304,6 +306,7 @@ public class Client : MonoBehaviour
         Debug.Log("Initialised the data packets...");
     }
 
+    //Safely disconnect the client from the server and close the relevant sockets
     private void Disconnect()
     {
         if(is_connected)
